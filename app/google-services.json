@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "179311203375",
+    "firebase_url": "https://rpgmobilegame2.firebaseio.com",
+    "project_id": "rpgmobilegame2",
+    "storage_bucket": "rpgmobilegame2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179311203375:android:ff3c9519a836b9e4",
+        "android_client_info": {
+          "package_name": "com.example.patry.rpgmobilegame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "179311203375-6vbvrv8mmde9nktghncd3bkcjt8u13me.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.patry.rpgmobilegame",
+            "certificate_hash": "61ca85c2fff4ef4695912289f9e4d9a1bc3df004"
+          }
+        },
+        {
+          "client_id": "179311203375-p6q5569pnpcc56nt050kcau5t10kr57u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg2Xrgq9uKm1Y3fG5X4dO5obww8LS54rA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "179311203375-p6q5569pnpcc56nt050kcau5t10kr57u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
