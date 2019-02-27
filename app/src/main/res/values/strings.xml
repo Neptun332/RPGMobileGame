@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RPGMobileGame</string>
+    <string name="title_activity_character">CharacterActivity</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.patry.rpgmobilegame;
+package com.example.patry.rpgmobilegame.activities;
 
 import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
@@ -7,15 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.patry.rpgmobilegame.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Loging extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button registerButton;
     private EditText nicknameEditText;
@@ -77,9 +77,9 @@ public class Loging extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(Loging.this, "User Registered", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "User Registered", Toast.LENGTH_SHORT).show();
                     }else{
-                            Toast.makeText(Loging.this,"Error" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this,"Error " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
