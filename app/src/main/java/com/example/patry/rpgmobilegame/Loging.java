@@ -36,50 +36,50 @@ public class Loging extends AppCompatActivity implements View.OnClickListener {
 
         progressDialog = new ProgressDialog(this);
 
-        registerButton = (Button) findViewById(R.id.registerButton);
-        nicknameEditText = (EditText) findViewById(R.id.nickname);
-        emailEditText = (EditText) findViewById(R.id.email);
-        passwordEditText = (EditText) findViewById(R.id.pass);
-        repeatPasswordEditText = (EditText) findViewById(R.id.repeatpass);
+        registerButton = findViewById(R.id.registerButton);
+        nicknameEditText = findViewById(R.id.nickname);
+        emailEditText = findViewById(R.id.email);
+        passwordEditText = findViewById(R.id.pass);
+        repeatPasswordEditText = findViewById(R.id.repeatpass);
 
         registerButton.setOnClickListener(this);
     }
 
-    private void registerUser(){
+    private void registerUser() {
         String nickName = nicknameEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
         String pass = passwordEditText.getText().toString().trim();
         String repeatPass = repeatPasswordEditText.getText().toString().trim();
 
-        if (nickName.isEmpty()){
-            Toast.makeText(this,"Please enter nickname",Toast.LENGTH_SHORT).show();
+        if (nickName.isEmpty()) {
+            Toast.makeText(this, "Please enter nickname", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (email.isEmpty()){
-            Toast.makeText(this,"Please enter e-mail adress",Toast.LENGTH_SHORT).show();
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Please enter e-mail adress", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (pass.isEmpty() || !pass.equals(repeatPass)){
-            Toast.makeText(this,"Password must be the same",Toast.LENGTH_SHORT).show();
+        if (pass.isEmpty() || !pass.equals(repeatPass)) {
+            Toast.makeText(this, "Password must be the same", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (pass.length()<=6){
-            Toast.makeText(this,"Password must be at least 6 characters long",Toast.LENGTH_SHORT).show();
+        if (pass.length() <= 6) {
+            Toast.makeText(this, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show();
             return;
         }
 
         progressDialog.setMessage("Registering...");
         progressDialog.show();
 
-        firebaseAuth.createUserWithEmailAndPassword(email,pass)
+        firebaseAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(Loging.this, "User Registered", Toast.LENGTH_SHORT).show();
-                    }else{
-                            Toast.makeText(Loging.this,"Error" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(Loging.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
