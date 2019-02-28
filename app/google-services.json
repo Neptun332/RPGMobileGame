@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "179311203375-4h7rocs2cr581sa7p7d333puof89n68k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.patry.rpgmobilegame",
+            "certificate_hash": "a5ae8661cd86d5ecefb8efdeb9f4ed923afc44df"
+          }
+        },
+        {
           "client_id": "179311203375-p6q5569pnpcc56nt050kcau5t10kr57u.apps.googleusercontent.com",
           "client_type": 3
         }
