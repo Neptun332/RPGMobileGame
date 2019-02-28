@@ -1,6 +1,7 @@
 package com.example.patry.rpgmobilegame;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -78,6 +79,8 @@ public class Loging extends AppCompatActivity implements View.OnClickListener {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(Loging.this, "User Registered", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Loging.this, GameActivity.class);
+                            startActivity(intent);
                         } else {
                             Toast.makeText(Loging.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
