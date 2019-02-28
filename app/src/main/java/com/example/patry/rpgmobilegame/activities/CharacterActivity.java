@@ -17,6 +17,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.util.Map;
+
 import javax.annotation.Nullable;
 
 public class CharacterActivity extends AppCompatActivity {
@@ -43,8 +45,6 @@ public class CharacterActivity extends AppCompatActivity {
 
         characterName =  findViewById(R.id.NameText);
 
-        //loadCharacterData();
-
     }
 
     // Listener for any data changes in DB, if something changes view will be updated
@@ -62,6 +62,9 @@ public class CharacterActivity extends AppCompatActivity {
 
                 if(documentSnapshot.exists()) {
                     character = new Character(documentSnapshot.getString(KEY_NAME),10,10,10);
+
+                    //Map<String,Object> charMap = documentSnapshot.
+
                     characterName.setText(character.name);
                 } else {
                     Toast.makeText(CharacterActivity.this, "document does not exists", Toast.LENGTH_SHORT);
