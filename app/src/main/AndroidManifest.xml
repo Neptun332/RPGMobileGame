@@ -15,8 +15,8 @@
             android:name=".activities.RegisterActivity"
             android:label="@string/title_activity_character"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activities.CharacterActivity"></activity>
         <activity
-            android:name=".activities.CharacterActivity"
             android:name=".GameActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
