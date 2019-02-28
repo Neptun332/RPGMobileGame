@@ -1,6 +1,7 @@
 package com.example.patry.rpgmobilegame.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loging);
+        setContentView(R.layout.activity_registration);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -45,41 +46,43 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         registerButton.setOnClickListener(this);
     }
 
-    private void registerUser(){
+    private void registerUser() {
         String nickName = nicknameEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
         String pass = passwordEditText.getText().toString().trim();
         String repeatPass = repeatPasswordEditText.getText().toString().trim();
 
-        if (nickName.isEmpty()){
-            Toast.makeText(this,"Please enter nickname",Toast.LENGTH_SHORT).show();
+        if (nickName.isEmpty()) {
+            Toast.makeText(this, "Please enter nickname", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (email.isEmpty()){
-            Toast.makeText(this,"Please enter e-mail adress",Toast.LENGTH_SHORT).show();
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Please enter e-mail adress", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (pass.isEmpty() || !pass.equals(repeatPass)){
-            Toast.makeText(this,"Password must be the same",Toast.LENGTH_SHORT).show();
+        if (pass.isEmpty() || !pass.equals(repeatPass)) {
+            Toast.makeText(this, "Password must be the same", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (pass.length()<=6){
-            Toast.makeText(this,"Password must be at least 6 characters long",Toast.LENGTH_SHORT).show();
+        if (pass.length() <= 6) {
+            Toast.makeText(this, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show();
             return;
         }
 
         progressDialog.setMessage("Registering...");
         progressDialog.show();
 
-        firebaseAuth.createUserWithEmailAndPassword(email,pass)
+        firebaseAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "User Registered", Toast.LENGTH_SHORT).show();
-                    }else{
-                            Toast.makeText(RegisterActivity.this,"Error " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegisterActivity.this, GameActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

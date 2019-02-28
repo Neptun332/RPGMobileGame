@@ -1,4 +1,4 @@
-package com.example.patry.rpgmobilegame;
+package com.example.patry.rpgmobilegame.activities;
 
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
