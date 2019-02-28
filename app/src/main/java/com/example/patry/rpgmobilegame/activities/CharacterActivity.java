@@ -13,12 +13,19 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import javax.annotation.Nullable;
 
 public class CharacterActivity extends AppCompatActivity {
     private static final String TAG = "CharacterActivity";
 
     private static final String KEY_NAME = "Name";
+    private static final String KEY_STR = "Strength";
+    private static final String KEY_AGL = "Agility";
+    private static final String KEY_VIT = "Vitality";
 
     private EditText characterName;
     //temp
@@ -26,7 +33,6 @@ public class CharacterActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference charRef = db.collection("users").document(UID).collection("Character").document("Stats");
-    private DocumentReference ref = db.document("users/mfQUhMQHJs2iNPiPK7rc");
 
     private Character character;
 
@@ -37,8 +43,31 @@ public class CharacterActivity extends AppCompatActivity {
 
         characterName =  findViewById(R.id.NameText);
 
-        loadCharacterData();
+        //loadCharacterData();
 
+    }
+
+    // Listener for any data changes in DB, if something changes view will be updated
+    @Override
+    protected void onStart(){
+        super.onStart();
+        charRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if(e != null) {
+                    Toast.makeText(CharacterActivity.this, "Error while loading!", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG,e.toString());
+                    return;
+                }
+
+                if(documentSnapshot.exists()) {
+                    character = new Character(documentSnapshot.getString(KEY_NAME),10,10,10);
+                    characterName.setText(character.name);
+                } else {
+                    Toast.makeText(CharacterActivity.this, "document does not exists", Toast.LENGTH_SHORT);
+                }
+            }
+        });
     }
 
     void loadCharacterData() {
