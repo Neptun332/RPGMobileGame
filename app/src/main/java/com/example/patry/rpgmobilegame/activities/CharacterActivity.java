@@ -23,15 +23,15 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import static com.example.patry.rpgmobilegame.player.Character.KEY_AGL;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_NAME;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_STR;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_VIT;
 import static java.lang.Math.toIntExact;
+
 
 public class CharacterActivity extends AppCompatActivity {
     private static final String TAG = "CharacterActivity";
-
-    private static final String KEY_NAME = "name";
-    private static final String KEY_STR = "strength";
-    private static final String KEY_AGL = "agility";
-    private static final String KEY_VIT = "vitality";
 
     private TextView characterName;
     private TextView characterStr;

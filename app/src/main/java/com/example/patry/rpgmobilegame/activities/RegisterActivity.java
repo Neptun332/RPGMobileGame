@@ -12,20 +12,32 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.patry.rpgmobilegame.R;
+import com.example.patry.rpgmobilegame.player.Character;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.patry.rpgmobilegame.player.Character.KEY_AGL;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_NAME;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_STR;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_VIT;
+import static java.lang.Math.toIntExact;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "RegisterActivity";
+    public static final int DEFAULT_STR = 10;
+    public static final int DEFAULT_AGL = 10;
+    public static final int DEFAULT_VIT = 10;
 
     private Button registerButton;
     private EditText nicknameEditText;
@@ -47,13 +59,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         progressDialog = new ProgressDialog(this);
 
-        registerButton = (Button) findViewById(R.id.registerButton);
-        nicknameEditText = (EditText) findViewById(R.id.nickname);
-        emailEditText = (EditText) findViewById(R.id.email);
-        passwordEditText = (EditText) findViewById(R.id.pass);
-        repeatPasswordEditText = (EditText) findViewById(R.id.repeatpass);
+        registerButton = findViewById(R.id.registerButton);
+        nicknameEditText = findViewById(R.id.nickname);
+        emailEditText = findViewById(R.id.email);
+        passwordEditText = findViewById(R.id.pass);
+        repeatPasswordEditText = findViewById(R.id.repeatpass);
 
         registerButton.setOnClickListener(this);
+
+
     }
 
     private void registerUser() {
@@ -89,24 +103,37 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "User Registered", Toast.LENGTH_SHORT).show();
-                            AddUserToDatabase();
+                            //pobranie usera i update jego display name na taki jak podał przy rejestracji
+                            task.getResult()
+                                    .getUser()
+                                    .updateProfile(new UserProfileChangeRequest
+                                            .Builder()
+                                            .setDisplayName(nicknameEditText.getText().toString())
+                                            .build());
+                            // AddUserToDatabase(task.getResult().getUser());
+
                             Intent intent = new Intent(RegisterActivity.this, GameActivity.class);
                             startActivity(intent);
                         } else {
                             Toast.makeText(RegisterActivity.this, "Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            Log.d(TAG,task.getException().toString());
+                            Log.d(TAG, task.getException().toString());
                         }
                     }
                 });
 
     }
 
-    private void AddUserToDatabase() {
+//    private void AddUserToDatabase(FirebaseUser currentRegisteredUser) {
 //        Map<String, Object> note = new HashMap<>();
-//        note.put(KEY_TITLE, title);
-//        note.put(KEY_DESCRIPTION, description);
 //
-//        db.collection("Notebook").document("My First Note").set(note)
+//        // Character character = new Character(nicknameEditText.toString(),DEFAULT_STR,DEFAULT_AGL,DEFAULT_VIT);
+//        note.put(KEY_NAME, nicknameEditText.toString());
+//        note.put(KEY_STR, DEFAULT_STR);
+//        note.put(KEY_AGL, DEFAULT_AGL);
+//        note.put(KEY_VIT, DEFAULT_VIT);
+//
+//
+//        db.collection("users").document().set(note)
 //                .addOnSuccessListener(new OnSuccessListener<Void>() {
 //                    @Override
 //                    public void onSuccess(Void aVoid) {
@@ -120,8 +147,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 //                        Log.d(TAG, e.toString());
 //                    }
 //                });
-
-    }
+//
+//    }
 
     @Override
     public void onClick(View v) {
