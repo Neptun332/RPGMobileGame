@@ -1,11 +1,16 @@
-package com.example.patry.rpgmobilegame.activities;
+package com.example.patry.rpgmobilegame.Fragments;
 
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,18 +25,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.Map;
+import java.util.concurrent.Executor;
 
 import javax.annotation.Nullable;
 
+import static com.example.patry.rpgmobilegame.player.Character.KEY_AGL;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_NAME;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_STR;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_VIT;
 import static java.lang.Math.toIntExact;
 
-public class CharacterActivity extends AppCompatActivity {
-    private static final String TAG = "CharacterActivity";
 
-    private static final String KEY_NAME = "name";
-    private static final String KEY_STR = "strength";
-    private static final String KEY_AGL = "agility";
-    private static final String KEY_VIT = "vitality";
+public class CharacterFragment extends Fragment {
+    private static final String TAG = "CharacterFragment";
 
     private TextView characterName;
     private TextView characterStr;
@@ -45,66 +51,74 @@ public class CharacterActivity extends AppCompatActivity {
 
     private Character character;
 
+    private View view;
+    private Activity currentActivity;
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_character);
-
-        characterName =  findViewById(R.id.nameText);
-        characterStr = findViewById(R.id.strText);
-        characterAgl = findViewById(R.id.aglText);
-        characterVit = findViewById(R.id.vitText);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_character, container, false);
+        characterName = view.findViewById(R.id.nameText);
+        characterStr = view.findViewById(R.id.strText);
+        characterAgl = view.findViewById(R.id.aglText);
+        characterVit = view.findViewById(R.id.vitText);
+        return view;
     }
+
+
+
     // Listener for any data changes in DB, if something changes view will be updated
     @Override
-    protected void onStart(){
+    public void onStart() {
         super.onStart();
-        charRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+        currentActivity = getActivity();
+
+        charRef.addSnapshotListener(currentActivity, new EventListener<DocumentSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                if(e != null) {
-                    Toast.makeText(CharacterActivity.this, "Error while loading!", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG,e.toString());
+                if (e != null) {
+                    Toast.makeText(currentActivity, "Error while loading!", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, e.toString());
                     return;
                 }
 
-                if(documentSnapshot.exists()) {
+                if (documentSnapshot.exists()) {
                     Map<String, Object> charMap = documentSnapshot.getData();
-                    character = new Character((String) charMap.get(KEY_NAME),toIntExact((long)charMap.get(KEY_STR)),toIntExact((long)charMap.get(KEY_AGL)),toIntExact((long)charMap.get(KEY_VIT)));
-                   // character = new Character((String) charMap.get(KEY_NAME),10,10,10);
+                    character = new Character((String) charMap.get(KEY_NAME), toIntExact((long) charMap.get(KEY_STR)), toIntExact((long) charMap.get(KEY_AGL)), toIntExact((long) charMap.get(KEY_VIT)));
+                    // character = new Character((String) charMap.get(KEY_NAME),10,10,10);
                     characterName.setText("Name: " + character.name);
                     characterStr.setText("Strength: " + character.strength);
                     characterAgl.setText("Agility: " + character.agility);
                     characterVit.setText("Vitality: " + character.vitality);
 
                 } else {
-                    Toast.makeText(CharacterActivity.this, "document does not exists", Toast.LENGTH_SHORT);
+                    Toast.makeText(currentActivity, "document does not exists", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
     void loadCharacterData() {
         charRef.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if(documentSnapshot.exists()) {
-                            character = new Character(documentSnapshot.getString(KEY_NAME),10,10,10);
+                        if (documentSnapshot.exists()) {
+                            character = new Character(documentSnapshot.getString(KEY_NAME), 10, 10, 10);
                             characterName.setText(character.name);
                         } else {
-                            Toast.makeText(CharacterActivity.this, "document does not exists", Toast.LENGTH_SHORT);
+                            Toast.makeText(currentActivity, "document does not exists", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(CharacterActivity.this, "Error!", Toast.LENGTH_SHORT);
-                        Log.d(TAG,e.toString());
+                        Toast.makeText(currentActivity, "Error!", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
                     }
                 });
-        }
+    }
 }
 
 
