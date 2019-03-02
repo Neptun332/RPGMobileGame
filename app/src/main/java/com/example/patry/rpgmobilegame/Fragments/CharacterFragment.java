@@ -18,6 +18,7 @@ import com.example.patry.rpgmobilegame.R;
 import com.example.patry.rpgmobilegame.player.Character;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -39,20 +40,22 @@ import static java.lang.Math.toIntExact;
 public class CharacterFragment extends Fragment {
     private static final String TAG = "CharacterFragment";
 
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    // View objects
     private TextView characterName;
     private TextView characterStr;
     private TextView characterAgl;
     private TextView characterVit;
-    //temp
-    private String UID = "mfQUhMQHJs2iNPiPK7rc";
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference charRef = db.collection("users").document(UID).collection("Character").document("Stats");
-
+    private String UID;
+    private DocumentReference charRef;
     private Character character;
 
     private View view;
     private Activity currentActivity;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,10 +64,12 @@ public class CharacterFragment extends Fragment {
         characterStr = view.findViewById(R.id.strText);
         characterAgl = view.findViewById(R.id.aglText);
         characterVit = view.findViewById(R.id.vitText);
+
+        UID = firebaseAuth.getCurrentUser().getUid();
+        charRef = db.collection("users").document(UID).collection("Character").document("Stats");
+
         return view;
     }
-
-
 
     // Listener for any data changes in DB, if something changes view will be updated
     @Override
@@ -96,28 +101,6 @@ public class CharacterFragment extends Fragment {
                 }
             }
         });
-    }
-
-    void loadCharacterData() {
-        charRef.get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            character = new Character(documentSnapshot.getString(KEY_NAME), 10, 10, 10);
-                            characterName.setText(character.name);
-                        } else {
-                            Toast.makeText(currentActivity, "document does not exists", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(currentActivity, "Error!", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, e.toString());
-                    }
-                });
     }
 }
 
