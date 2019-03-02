@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button loginButton;
     private Button registerButton;
 
-    private EditText emialEditText;
+    private EditText emailEditText;
     private EditText passwordEditText;
 
     private FirebaseAuth firebaseAuth;
@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         firebaseAuth = FirebaseAuth.getInstance();
         loginButton = findViewById(R.id.loginButtton);
         registerButton = findViewById(R.id.registerButton);
-        emialEditText = findViewById(R.id.email_login);
+        emailEditText = findViewById(R.id.email_login);
         passwordEditText = findViewById(R.id.password_login);
 
         loginButton.setOnClickListener(this);
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.setMessage("Logging...");
         progressDialog.show();
 
-        firebaseAuth.signInWithEmailAndPassword(emialEditText.toString(), passwordEditText.toString())
+        firebaseAuth.signInWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
@@ -79,8 +79,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        Intent intent = new Intent(LoginActivity.this, GameActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(LoginActivity.this, GameActivity.class);
+//        startActivity(intent);
 
 
     }

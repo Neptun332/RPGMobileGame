@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +15,8 @@ import android.widget.Toast;
 
 import com.example.patry.rpgmobilegame.R;
 import com.example.patry.rpgmobilegame.player.Character;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -26,7 +24,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.Map;
-import java.util.concurrent.Executor;
 
 import javax.annotation.Nullable;
 
@@ -40,8 +37,8 @@ import static java.lang.Math.toIntExact;
 public class CharacterFragment extends Fragment {
     private static final String TAG = "CharacterFragment";
 
-    private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth;
 
     // View objects
     private TextView characterName;
@@ -65,8 +62,7 @@ public class CharacterFragment extends Fragment {
         characterAgl = view.findViewById(R.id.aglText);
         characterVit = view.findViewById(R.id.vitText);
 
-        UID = firebaseAuth.getCurrentUser().getUid();
-        charRef = db.collection("users").document(UID).collection("Character").document("Stats");
+        firebaseAuth = FirebaseAuth.getInstance();
 
         return view;
     }
@@ -76,6 +72,22 @@ public class CharacterFragment extends Fragment {
     public void onStart() {
         super.onStart();
         currentActivity = getActivity();
+        firebaseAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                LoadUserData();
+            }
+        });
+    }
+
+    void LoadUserData() {
+        UID = FirebaseAuth.getInstance().getUid();
+        if (UID != null){
+            charRef = db.collection("Users").document(UID).collection("Character").document("Stats");
+        }
+        else {
+            return;
+        }
 
         charRef.addSnapshotListener(currentActivity, new EventListener<DocumentSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
