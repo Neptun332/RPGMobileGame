@@ -110,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                             .Builder()
                                             .setDisplayName(nicknameEditText.getText().toString())
                                             .build());
-                            // AddUserToDatabase(task.getResult().getUser());
+                            AddUserToDatabase(task.getResult().getUser());
 
                             Intent intent = new Intent(RegisterActivity.this, GameActivity.class);
                             startActivity(intent);
@@ -123,32 +123,35 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-//    private void AddUserToDatabase(FirebaseUser currentRegisteredUser) {
-//        Map<String, Object> note = new HashMap<>();
-//
-//        // Character character = new Character(nicknameEditText.toString(),DEFAULT_STR,DEFAULT_AGL,DEFAULT_VIT);
-//        note.put(KEY_NAME, nicknameEditText.toString());
-//        note.put(KEY_STR, DEFAULT_STR);
-//        note.put(KEY_AGL, DEFAULT_AGL);
-//        note.put(KEY_VIT, DEFAULT_VIT);
-//
-//
-//        db.collection("users").document().set(note)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        Toast.makeText(MainActivity.this, "Note saved", Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(MainActivity.this, "Error!", Toast.LENGTH_SHORT).show();
-//                        Log.d(TAG, e.toString());
-//                    }
-//                });
-//
-//    }
+    private void AddUserToDatabase(FirebaseUser currentRegisteredUser) {
+        Map<String, Object> note = new HashMap<>();
+
+        note.put(KEY_NAME, nicknameEditText.getText().toString());
+        note.put(KEY_STR, DEFAULT_STR);
+        note.put(KEY_AGL, DEFAULT_AGL);
+        note.put(KEY_VIT, DEFAULT_VIT);
+
+        db
+                .collection("Users")
+                .document(firebaseAuth.getUid())
+                .collection("Character")
+                .document("Stats")
+                .set(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(RegisterActivity.this, "Note saved", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(RegisterActivity.this, "Error!", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+
+    }
 
     @Override
     public void onClick(View v) {
