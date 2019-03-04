@@ -26,18 +26,28 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_AGL;
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_EXP;
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_INT;
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_LVL;
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_STR;
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_VIT;
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_WIS;
+import static com.example.patry.rpgmobilegame.player.Character.DEFAUL_GOLD;
 import static com.example.patry.rpgmobilegame.player.Character.KEY_AGL;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_EXP;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_GOLD;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_INT;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_LVL;
 import static com.example.patry.rpgmobilegame.player.Character.KEY_NAME;
 import static com.example.patry.rpgmobilegame.player.Character.KEY_STR;
 import static com.example.patry.rpgmobilegame.player.Character.KEY_VIT;
+import static com.example.patry.rpgmobilegame.player.Character.KEY_WIS;
 import static java.lang.Math.toIntExact;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "RegisterActivity";
-    public static final int DEFAULT_STR = 10;
-    public static final int DEFAULT_AGL = 10;
-    public static final int DEFAULT_VIT = 10;
 
     private Button registerButton;
     private EditText nicknameEditText;
@@ -66,8 +76,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         repeatPasswordEditText = findViewById(R.id.repeatpass);
 
         registerButton.setOnClickListener(this);
-
-
     }
 
     private void registerUser() {
@@ -120,16 +128,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         }
                     }
                 });
-
     }
 
     private void AddUserToDatabase(FirebaseUser currentRegisteredUser) {
         Map<String, Object> note = new HashMap<>();
 
         note.put(KEY_NAME, nicknameEditText.getText().toString());
+        note.put(KEY_LVL, DEFAULT_LVL);
+        note.put(KEY_EXP, DEFAULT_EXP);
         note.put(KEY_STR, DEFAULT_STR);
         note.put(KEY_AGL, DEFAULT_AGL);
         note.put(KEY_VIT, DEFAULT_VIT);
+        note.put(KEY_INT, DEFAULT_INT);
+        note.put(KEY_WIS,DEFAULT_WIS);
+        note.put(KEY_GOLD,DEFAUL_GOLD);
 
         db
                 .collection("Users")

@@ -8,12 +8,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/characterInfoLabel"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Character Info:"
+            android:text="@string/character_info"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -28,24 +29,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Name: " />
+            android:text="@string/name" />
+
         <TextView
             android:id="@+id/strText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Strength: " />
+            android:text="@string/strength" />
 
         <TextView
             android:id="@+id/aglText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Agility: " />
+            android:text="@string/agility" />
 
         <TextView
             android:id="@+id/vitText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vitality: " />
+            android:text="@string/vitality" />
+
+        <TextView
+            android:id="@+id/intText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/intelligence" />
+
+        <TextView
+            android:id="@+id/wisText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/wisdom" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/eqButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/equipment" />
+
 </LinearLayout>
 

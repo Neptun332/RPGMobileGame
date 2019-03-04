@@ -16,4 +16,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="equipment">Equipment</string>
+    <string name="wisdom">Wisdom:</string>
+    <string name="intelligence">Intelligence:</string>
+    <string name="vitality">Vitality:</string>
+    <string name="agility">Agility:</string>
+    <string name="strength">Strength:</string>
+    <string name="name">Name:</string>
+    <string name="character_info">Character Info:</string>
 </resources>
