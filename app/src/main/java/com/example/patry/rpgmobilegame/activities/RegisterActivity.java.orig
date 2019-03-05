@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_AGL;
+<<<<<<< HEAD
 import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_EXP;
 import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_INT;
 import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_LVL;
@@ -34,6 +35,10 @@ import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_STR;
 import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_VIT;
 import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_WIS;
 import static com.example.patry.rpgmobilegame.player.Character.DEFAUL_GOLD;
+=======
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_STR;
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_VIT;
+>>>>>>> AdventureBranch
 import static com.example.patry.rpgmobilegame.player.Character.KEY_AGL;
 import static com.example.patry.rpgmobilegame.player.Character.KEY_EXP;
 import static com.example.patry.rpgmobilegame.player.Character.KEY_GOLD;

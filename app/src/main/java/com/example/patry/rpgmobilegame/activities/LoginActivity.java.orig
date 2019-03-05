@@ -64,7 +64,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.setMessage("Logging...");
         progressDialog.show();
 
+<<<<<<< HEAD
+        firebaseAuth.signInWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
+=======
         firebaseAuth.signInWithEmailAndPassword(emialEditText.getText().toString(), passwordEditText.getText().toString())
+>>>>>>> AdventureBranch
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
@@ -79,5 +83,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+<<<<<<< HEAD
+//        Intent intent = new Intent(LoginActivity.this, GameActivity.class);
+//        startActivity(intent);
+
+
+=======
+>>>>>>> AdventureBranch
     }
 }
