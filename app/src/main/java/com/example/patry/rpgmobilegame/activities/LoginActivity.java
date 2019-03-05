@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.setMessage("Logging...");
         progressDialog.show();
 
-        firebaseAuth.signInWithEmailAndPassword(emialEditText.toString(), passwordEditText.toString())
+        firebaseAuth.signInWithEmailAndPassword(emialEditText.getText().toString(), passwordEditText.getText().toString())
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
@@ -78,10 +78,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.d(TAG,e.toString());
             }
         });
-
-        Intent intent = new Intent(LoginActivity.this, GameActivity.class);
-        startActivity(intent);
-
 
     }
 }

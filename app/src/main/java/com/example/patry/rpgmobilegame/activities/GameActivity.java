@@ -41,18 +41,20 @@ public class GameActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new AdventureFragment()).commit();
-
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new AdventureFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_adventure);
+        }
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.nav_adventure:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AdventureFragment()).commit();
+                case R.id.nav_adventure:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new AdventureFragment()).commit();
                 break;
             case R.id.nav_character:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

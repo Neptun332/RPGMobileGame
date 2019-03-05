@@ -7,6 +7,11 @@ public class Character {
     public static final String KEY_AGL = "agility";
     public static final String KEY_VIT = "vitality";
 
+    public static final int DEFAULT_STR = 10;
+    public static final int DEFAULT_AGL = 10;
+    public static final int DEFAULT_VIT = 10;
+
+
     public Character(String name, int strength, int agility, int vitality) {
         this.name = name;
         this.strength = strength;

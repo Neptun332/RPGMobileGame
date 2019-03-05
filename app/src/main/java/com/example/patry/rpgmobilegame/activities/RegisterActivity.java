@@ -26,6 +26,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_AGL;
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_STR;
+import static com.example.patry.rpgmobilegame.player.Character.DEFAULT_VIT;
 import static com.example.patry.rpgmobilegame.player.Character.KEY_AGL;
 import static com.example.patry.rpgmobilegame.player.Character.KEY_NAME;
 import static com.example.patry.rpgmobilegame.player.Character.KEY_STR;
@@ -35,9 +38,6 @@ import static java.lang.Math.toIntExact;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "RegisterActivity";
-    public static final int DEFAULT_STR = 10;
-    public static final int DEFAULT_AGL = 10;
-    public static final int DEFAULT_VIT = 10;
 
     private Button registerButton;
     private EditText nicknameEditText;
@@ -110,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                             .Builder()
                                             .setDisplayName(nicknameEditText.getText().toString())
                                             .build());
-                            AddUserToDatabase(task.getResult().getUser());
+                            AddUserToDatabase();
 
                             Intent intent = new Intent(RegisterActivity.this, GameActivity.class);
                             startActivity(intent);
@@ -123,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private void AddUserToDatabase(FirebaseUser currentRegisteredUser) {
+    private void AddUserToDatabase( ) {
         Map<String, Object> note = new HashMap<>();
 
         note.put(KEY_NAME, nicknameEditText.getText().toString());
