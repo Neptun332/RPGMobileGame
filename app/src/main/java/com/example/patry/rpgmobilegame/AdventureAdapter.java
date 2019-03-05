@@ -22,6 +22,10 @@ public class AdventureAdapter extends RecyclerView.Adapter<AdventureAdapter.Adve
         void onItemClick(int position);
     }
 
+    public AdventureAdapter(List<Adventure> adventures) {
+        this.adventures = adventures;
+    }
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
@@ -39,8 +43,8 @@ public class AdventureAdapter extends RecyclerView.Adapter<AdventureAdapter.Adve
     public void onBindViewHolder(@NonNull AdventureHolder tourHolder, int i) {
         Adventure currentAdventure = adventures.get(i);
         tourHolder.textViewName.setText(currentAdventure.getName());
-        tourHolder.textViewName.setText(currentAdventure.getLvl());
-        tourHolder.textViewName.setText(currentAdventure.getDifficulty());
+        tourHolder.textViewLvl.setText(currentAdventure.getLvl());
+        tourHolder.textViewDifficulty.setText(currentAdventure.getDifficulty());
 
 
     }

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.patry.rpgmobilegame.Adventure;
 import com.example.patry.rpgmobilegame.AdventureAdapter;
@@ -23,9 +24,10 @@ import javax.annotation.Nullable;
 public class AdventureFragment extends Fragment {
 
     private List<Adventure> adventureList = new ArrayList();
-    private final AdventureAdapter adapter = new AdventureAdapter();
+    private AdventureAdapter adapter;
     private RecyclerView recyclerView;
     private View view;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_adventure, container, false);
@@ -41,26 +43,22 @@ public class AdventureFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager();
-        mAdapter = new ExampleAdapter(exampleList);
+        mLayoutManager = new LinearLayoutManager(getContext());
+        adapter = new AdventureAdapter(adventureList);
 
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-
-        recyclerView = view.getRootView().findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
-        adapter.setAdventures(adventureList);
 
         adapter.setOnItemClickListener(new AdventureAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Adventure adventure = adventureList.get(position);
                 //TODO wybranie wycieczki i uruchomienie ekranu walki
+                Toast.makeText(getContext(), "klik", Toast.LENGTH_SHORT).show();
             }
         });
         return view;
     }
-
 
 
 }
