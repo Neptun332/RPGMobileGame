@@ -42,3 +42,6 @@ Thumbs.db
 /.idea/assetWizardSettings.xml
 /.idea/assetWizardSettings.xml
 /.idea/caches/build_file_checksums.ser
+/app/src/main/java/com/example/patry/rpgmobilegame/activities/LoginActivity.java.orig
+/app/src/main/java/com/example/patry/rpgmobilegame/activities/RegisterActivity.java.orig
+/app/src/main/java/com/example/patry/rpgmobilegame/player/Character.java.orig

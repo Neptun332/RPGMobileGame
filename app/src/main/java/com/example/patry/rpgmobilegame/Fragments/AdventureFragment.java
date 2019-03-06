@@ -32,9 +32,9 @@ public class AdventureFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_adventure, container, false);
 
-        Adventure adventureForrest = new Adventure("Forrest", "Lvl 1-10", "Easy");
-        Adventure adventureMine = new Adventure("Mine", "Lvl 10-20", "Medium");
-        Adventure adventureCity = new Adventure("City", "Lvl 20-30", "Hard");
+        Adventure adventureForrest = new Adventure("Forrest", "Lvl 1-10", "Easy", R.drawable.forrest2);
+        Adventure adventureMine = new Adventure("Quarry", "Lvl 10-20", "Medium",R.drawable.quarry);
+        Adventure adventureCity = new Adventure("Mine", "Lvl 20-30", "Hard",R.drawable.mine);
 
         adventureList.add(adventureForrest);
         adventureList.add(adventureMine);

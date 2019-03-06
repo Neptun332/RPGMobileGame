@@ -5,11 +5,13 @@ public class Adventure {
     private String name;
     private String lvl;
     private String difficulty;
+    private int imageFile;
 
-    public Adventure(String name, String lvl, String difficulty) {
+    public Adventure(String name, String lvl, String difficulty, int imageFile) {
         this.name = name;
         this.lvl = lvl;
         this.difficulty = difficulty;
+        this.imageFile = imageFile;
     }
 
     public String getName() {
@@ -22,5 +24,9 @@ public class Adventure {
 
     public String getDifficulty() {
         return difficulty;
+    }
+
+    public int getImageFile() {
+        return imageFile;
     }
 }
