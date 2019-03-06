@@ -1,25 +1,35 @@
 package com.example.patry.rpgmobilegame.player;
 
 public class EquipmentItem {
-    private int mImageResource;
-    private String eqText1;
-    private String eqText2;
+    private int itemIcon;
+    private String itemName;
+    private String itemStats;
+    private Boolean isEquiped = false;
 
-    public EquipmentItem(int mImageResource, String eqText1, String eqText2) {
-        this.mImageResource = mImageResource;
-        this.eqText1 = eqText1;
-        this.eqText2 = eqText2;
+    public EquipmentItem(int itemIcon, String itemName, String itemStats, Boolean isEquiped) {
+        this.itemIcon = itemIcon;
+        this.itemName = itemName;
+        this.itemStats = itemStats;
+        this.isEquiped = isEquiped;
     }
 
-    public String getEqText1() {
-        return eqText1;
+    public String getItemName() {
+        return itemName;
     }
 
-    public String getEqText2() {
-        return eqText2;
+    public String getItemStats() {
+        return itemStats;
     }
 
-    public int getmImageResource() {
-        return mImageResource;
+    public int getItemIcon() {
+        return itemIcon;
+    }
+
+    public Boolean getEquiped() {
+        return isEquiped;
+    }
+
+    public void setEquiped(Boolean equiped) {
+        isEquiped = equiped;
     }
 }
