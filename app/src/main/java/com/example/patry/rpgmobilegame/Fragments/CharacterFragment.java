@@ -77,7 +77,7 @@ public class CharacterFragment extends Fragment {
             public void onClick(View v) {
                 Fragment newFragment = new EquipmentFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container,newFragment);
+                transaction.replace(R.id.fragment_container, newFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
@@ -103,10 +103,9 @@ public class CharacterFragment extends Fragment {
 
     void LoadUserData() {
         UID = FirebaseAuth.getInstance().getUid();
-        if (UID != null){
+        if (UID != null) {
             charRef = db.collection("Users").document(UID).collection("Character").document("Stats");
-        }
-        else {
+        } else {
             Toast.makeText(currentActivity, "UID is NULL", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -123,7 +122,12 @@ public class CharacterFragment extends Fragment {
                 }
                 if (documentSnapshot.exists()) {
                     Map<String, Object> charMap = documentSnapshot.getData();
-                    character = new Character((String) charMap.get(KEY_NAME), toIntExact((long) charMap.get(KEY_STR)), toIntExact((long) charMap.get(KEY_AGL)), toIntExact((long) charMap.get(KEY_VIT)),toIntExact((long) charMap.get(KEY_INT)),toIntExact((long) charMap.get(KEY_WIS)));
+                    character = new Character((String) charMap.get(KEY_NAME)
+                            , toIntExact((long) charMap.get(KEY_STR))
+                            , toIntExact((long) charMap.get(KEY_AGL))
+                            , toIntExact((long) charMap.get(KEY_VIT))
+                            , toIntExact((long) charMap.get(KEY_INT))
+                            , toIntExact((long) charMap.get(KEY_WIS)));
                     // character = new Character((String) charMap.get(KEY_NAME),10,10,10);
                     characterName.setText("Name: " + character.name);
                     characterStr.setText("Strength: " + character.strength);
