@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.patry.rpgmobilegame.Adventure;
@@ -55,31 +56,25 @@ public class AdventureFragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private Map<String, Object> AdventureMap = new HashMap<>();
+    private ProgressBar progressBar;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_adventure, container, false);
-
+        progressBar = view.findViewById(R.id.progressBar_circular);
         //PopulateDataBase populateDataBase = new PopulateDataBase();
         //populateDataBase.populateAdventures();
-
-
+        progressBar.setVisibility(View.VISIBLE);
         CollectionReference colRef = db.collection("Adventure");
         colRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-
             Map<String, Object> AdventureMap;
-
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
                 if (task.isSuccessful()) {
-
-
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         AdventureMap = new HashMap<>();
                         AdventureMap.putAll(document.getData());
                         adventureList.add(AdventureMap);
                     }
-
                     recyclerView = view.findViewById(R.id.recycler_view);
                     recyclerView.setHasFixedSize(true);
                     mLayoutManager = new LinearLayoutManager(getContext());
@@ -96,10 +91,11 @@ public class AdventureFragment extends Fragment {
                             Toast.makeText(getContext(), "klik", Toast.LENGTH_SHORT).show();
                         }
                     });
-
+                    progressBar.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(getContext(), "failed loading adventures", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "get failed with ", task.getException());
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });

@@ -45,7 +45,7 @@ public class PopulateDataBase {
 
             db
                     .collection("Adventure")
-                    .document(adventureList.get(i).getName())
+                    .document((i+1)+" "+adventureList.get(i).getName())
                     .set(adventureData);
         }
     }
