@@ -1,4 +1,4 @@
-package com.example.patry.rpgmobilegame;
+package com.example.patry.rpgmobilegame.Adventure;
 
 public class Adventure {
 
@@ -14,6 +14,10 @@ public class Adventure {
     private int lvlMax;
     private String difficulty;
     private int imageFile;
+
+    public Adventure(){
+        //no-arg constructor needed
+    }
 
     public Adventure(String name, String difficulty, int imageFile, int lvlMin, int lvlMax) {
         this.name = name;
@@ -42,4 +46,6 @@ public class Adventure {
     public int getImageFile() {
         return imageFile;
     }
+
+
 }

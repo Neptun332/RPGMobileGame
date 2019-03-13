@@ -1,7 +1,6 @@
-package com.example.patry.rpgmobilegame;
+package com.example.patry.rpgmobilegame.Adventure;
 
 import android.os.Build;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.AppCompatImageView;
@@ -9,19 +8,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.example.patry.rpgmobilegame.R;
+
 import java.util.List;
 import java.util.Map;
 
-import static com.example.patry.rpgmobilegame.Adventure.KEY_ADVENTURE_DIFFICULTY;
-import static com.example.patry.rpgmobilegame.Adventure.KEY_ADVENTURE_NAME;
-import static com.example.patry.rpgmobilegame.Adventure.KEY_IMAGE_FILE_ID;
-import static com.example.patry.rpgmobilegame.Adventure.KEY__ADVENTURE_LVL_MAX;
-import static com.example.patry.rpgmobilegame.Adventure.KEY__ADVENTURE_LVL_MIN;
+import static com.example.patry.rpgmobilegame.Adventure.Adventure.KEY_ADVENTURE_DIFFICULTY;
+import static com.example.patry.rpgmobilegame.Adventure.Adventure.KEY_ADVENTURE_NAME;
+import static com.example.patry.rpgmobilegame.Adventure.Adventure.KEY_IMAGE_FILE_ID;
+import static com.example.patry.rpgmobilegame.Adventure.Adventure.KEY__ADVENTURE_LVL_MAX;
+import static com.example.patry.rpgmobilegame.Adventure.Adventure.KEY__ADVENTURE_LVL_MIN;
 import static java.lang.Math.toIntExact;
 
 public class AdventureAdapter extends RecyclerView.Adapter<AdventureAdapter.AdventureHolder> {

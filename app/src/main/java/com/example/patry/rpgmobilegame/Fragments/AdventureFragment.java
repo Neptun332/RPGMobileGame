@@ -12,36 +12,22 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.patry.rpgmobilegame.Adventure;
-import com.example.patry.rpgmobilegame.AdventureAdapter;
+import com.example.patry.rpgmobilegame.Adventure.AdventureAdapter;
 import com.example.patry.rpgmobilegame.PopulateDataBase;
 import com.example.patry.rpgmobilegame.R;
-import com.example.patry.rpgmobilegame.activities.GameActivity;
-import com.example.patry.rpgmobilegame.player.Character;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nullable;
-
-import static com.example.patry.rpgmobilegame.player.Character.KEY_AGL;
-import static com.example.patry.rpgmobilegame.player.Character.KEY_INT;
-import static com.example.patry.rpgmobilegame.player.Character.KEY_NAME;
-import static com.example.patry.rpgmobilegame.player.Character.KEY_STR;
-import static com.example.patry.rpgmobilegame.player.Character.KEY_VIT;
-import static com.example.patry.rpgmobilegame.player.Character.KEY_WIS;
-import static java.lang.Math.toIntExact;
 
 public class AdventureFragment extends Fragment {
 
@@ -61,8 +47,9 @@ public class AdventureFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_adventure, container, false);
         progressBar = view.findViewById(R.id.progressBar_circular);
-        //PopulateDataBase populateDataBase = new PopulateDataBase();
+        PopulateDataBase populateDataBase = new PopulateDataBase();
         //populateDataBase.populateAdventures();
+        populateDataBase.populateItems();
         progressBar.setVisibility(View.VISIBLE);
         CollectionReference colRef = db.collection("Adventure");
         colRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
