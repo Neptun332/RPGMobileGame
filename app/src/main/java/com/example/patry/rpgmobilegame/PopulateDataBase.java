@@ -1,6 +1,7 @@
 package com.example.patry.rpgmobilegame;
 
 import com.example.patry.rpgmobilegame.Adventure.Adventure;
+import com.example.patry.rpgmobilegame.Enums.Rarity;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class PopulateDataBase {
 
     private void createHelmets() {
 
-        Item item1 = new Item(itemIndex++,Rarity.COMMON, "Wooden training helmet",1, 2);
+        Item item1 = new Item(itemIndex++, Rarity.COMMON, "Wooden training helmet",1, 2);
         Item item2 = new Item(itemIndex++,Rarity.MAGIC, "Wooden training helmet",2, 2);
         Item item3 = new Item(itemIndex++,Rarity.RARE, "Wooden training helmet",3, 2);
         Item item4 = new Item(itemIndex++,Rarity.EPIC, "Wooden training helmet",4, 2);

@@ -1,5 +1,7 @@
 package com.example.patry.rpgmobilegame;
 
+import com.example.patry.rpgmobilegame.Enums.Rarity;
+
 class Item {
 
     private int IID;

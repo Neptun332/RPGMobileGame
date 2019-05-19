@@ -49,7 +49,7 @@ public class AdventureFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar_circular);
         PopulateDataBase populateDataBase = new PopulateDataBase();
         //populateDataBase.populateAdventures();
-        populateDataBase.populateItems();
+        //populateDataBase.populateItems();
         progressBar.setVisibility(View.VISIBLE);
         CollectionReference colRef = db.collection("Adventure");
         colRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -75,6 +75,7 @@ public class AdventureFragment extends Fragment {
                         public void onItemClick(int position) {
                             //Adventure adventure = adventureList.get(position);
                             //TODO wybranie wycieczki i uruchomienie ekranu walki
+                            startFightFragment();
                             Toast.makeText(getContext(), "klik", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -92,5 +93,9 @@ public class AdventureFragment extends Fragment {
         return view;
     }
 
+    void startFightFragment(){
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new FightFragment()).commit();
+    }
 
 }
